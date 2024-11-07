@@ -9,23 +9,20 @@ import {
   ChevronRight,
   MapPin,
   Phone,
-  Clock,
   Send
 } from "lucide-react";
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const [email, setEmail] = useState("");
-  const [isHovered, setIsHovered] = useState(false);
 
   const handleSubscribe = (e) => {
     e.preventDefault();
-    // Handle subscription logic here
     setEmail("");
   };
 
   return (
     <footer className="relative bg-gradient-to-b from-gray-900 via-gray-900 to-black text-gray-300 overflow-hidden">
-      {/* Decorative Elements */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_-20%,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent"></div>
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:40px_40px]"></div>
 
@@ -81,27 +78,23 @@ const Footer = () => {
               viewport={{ once: true }}
               className="space-y-4"
             >
-              <h3 className="text-2xl font-bold text-white">USCL</h3>
+              <h3 className="text-2xl font-bold text-white">BilvaLabs</h3>
               <p className="text-gray-400 leading-relaxed">
                 Empowering the future through innovative technology solutions and exceptional service since 2020.
               </p>
               <div className="flex space-x-4 pt-4">
-                {[
-                  { icon: Facebook, color: "hover:text-blue-400" },
-                  { icon: Twitter, color: "hover:text-blue-400" },
-                  { icon: Instagram, color: "hover:text-pink-400" },
-                  { icon: Linkedin, color: "hover:text-blue-400" },
-                  { icon: Mail, color: "hover:text-purple-400" }
-                ].map((social, index) => (
-                  <motion.a
-                    key={index}
-                    href="#"
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className={`text-gray-400 transition-colors duration-300 ${social.color}`}
-                  >
-                    <social.icon size={20} />
-                  </motion.a>
-                ))}
+                <motion.a href="https://www.facebook.com/profile.php?id=61567854182486" whileHover={{ scale: 1.1, rotate: 5 }} className="text-gray-400 hover:text-blue-400 transition-colors duration-300">
+                  <Facebook size={20} />
+                </motion.a>
+                <motion.a href="https://x.com/uscl_tech" whileHover={{ scale: 1.1, rotate: 5 }} className="text-gray-400 hover:text-blue-400 transition-colors duration-300">
+                  <Twitter size={20} />
+                </motion.a>
+                <motion.a href="https://www.instagram.com/uscl.tech/" whileHover={{ scale: 1.1, rotate: 5 }} className="text-gray-400 hover:text-pink-400 transition-colors duration-300">
+                  <Instagram size={20} />
+                </motion.a>
+                <motion.a href="https://www.linkedin.com/in/bilva-uscl-725694337/" whileHover={{ scale: 1.1, rotate: 5 }} className="text-gray-400 hover:text-blue-400 transition-colors duration-300">
+                  <Linkedin size={20} />
+                </motion.a>
               </div>
             </motion.div>
 
@@ -123,10 +116,7 @@ const Footer = () => {
                   "Contact"
                 ].map((link, index) => (
                   <li key={index}>
-                    <a
-                      href="#"
-                      className="group flex items-center text-gray-400 hover:text-white transition-colors duration-200"
-                    >
+                    <a href="#" className="group flex items-center text-gray-400 hover:text-white transition-colors duration-200">
                       <ChevronRight size={16} className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity" />
                       {link}
                     </a>
@@ -147,21 +137,17 @@ const Footer = () => {
                 <li className="flex items-start space-x-3">
                   <MapPin size={20} className="text-blue-400 mt-1" />
                   <span className="text-gray-400">
-                    123 Innovation Drive<br />
-                    New York, NY 10001
+                    Second Floor, BHUVANA TOWERS,<br />
+                    Sarojini Devi Rd, Secunderabad, Telangana 500003.
                   </span>
                 </li>
                 <li className="flex items-center space-x-3">
                   <Phone size={20} className="text-blue-400" />
-                  <span className="text-gray-400">(555) 123-4567</span>
+                  <span className="text-gray-400">8801886108</span>
                 </li>
                 <li className="flex items-center space-x-3">
                   <Mail size={20} className="text-blue-400" />
-                  <span className="text-gray-400">info@uscl.com</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <Clock size={20} className="text-blue-400" />
-                  <span className="text-gray-400">Mon - Fri: 9AM - 6PM</span>
+                  <span className="text-gray-400">info@uscl.tech</span>
                 </li>
               </ul>
             </motion.div>
@@ -175,26 +161,11 @@ const Footer = () => {
             >
               <h4 className="text-lg font-semibold text-white">Latest Updates</h4>
               <div className="space-y-4">
-                {[
-                  {
-                    title: "New Course Launch",
-                    date: "March 15, 2024",
-                    description: "Advanced Web Development with React & Node.js"
-                  },
-                  {
-                    title: "Tech Workshop",
-                    date: "March 20, 2024",
-                    description: "Hands-on Ethical Hacking Workshop"
-                  }
-                ].map((update, index) => (
-                  <div key={index} className="group cursor-pointer">
-                    <p className="text-sm text-blue-400">{update.date}</p>
-                    <h5 className="text-white group-hover:text-blue-400 transition-colors duration-200">
-                      {update.title}
-                    </h5>
-                    <p className="text-sm text-gray-400">{update.description}</p>
-                  </div>
-                ))}
+                <div className="group cursor-pointer">
+                  <h5 className="text-white group-hover:text-blue-400 transition-colors duration-200">
+                    Launching Courses Soon
+                  </h5>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -205,18 +176,18 @@ const Footer = () => {
           <div className="container mx-auto px-6 py-6">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <p className="text-gray-400 text-sm">
-                &copy; 2024 USCL. All rights reserved.
+                &copy; 2024 BilvaLabs. All rights reserved.
               </p>
               <div className="flex space-x-6 mt-4 md:mt-0">
-                <a href="#" className="text-sm text-gray-400 hover:text-white transition-colors duration-200">
+                <Link to="/privacy-policy" className="text-sm text-gray-400 hover:text-white transition-colors duration-200">
                   Privacy Policy
-                </a>
-                <a href="#" className="text-sm text-gray-400 hover:text-white transition-colors duration-200">
+                </Link>
+                <Link to="/terms-of-service" className="text-sm text-gray-400 hover:text-white transition-colors duration-200">
                   Terms of Service
-                </a>
-                <a href="#" className="text-sm text-gray-400 hover:text-white transition-colors duration-200">
+                </Link>
+                <Link to="/cookie-policy" className="text-sm text-gray-400 hover:text-white transition-colors duration-200">
                   Cookie Policy
-                </a>
+                </Link>
               </div>
             </div>
           </div>

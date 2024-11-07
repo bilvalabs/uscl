@@ -1,4 +1,8 @@
 /** @type {import('tailwindcss').Config} */
+import forms from '@tailwindcss/forms';
+import typography from '@tailwindcss/typography';
+import aspectRatio from '@tailwindcss/aspect-ratio';
+
 export default {
   darkMode: 'class',
   content: [
@@ -64,10 +68,10 @@ export default {
     },
   },
   plugins: [
-    require('@tailwindcss/forms')({
+    forms({
       strategy: 'class',
     }),
-    require('@tailwindcss/typography'),
-    require('@tailwindcss/aspect-ratio'),
+    typography,
+    aspectRatio,
   ],
 };

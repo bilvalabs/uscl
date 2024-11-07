@@ -1,15 +1,10 @@
+// src/components/Navbar.jsx (Updated)
 import React, { useState, useEffect } from "react";
 import { 
-  FaHome, 
-  FaBook, 
-  FaUser, 
   FaBars, 
   FaTimes, 
-  FaUserFriends,
   FaCode,
-  FaGraduationCap,
-  FaSignInAlt,
-  FaUserCircle
+  FaSignInAlt
 } from "react-icons/fa";
 import { 
   HiOutlineAcademicCap,
@@ -27,11 +22,7 @@ const Navbar = () => {
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 20);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -135,45 +126,42 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4">
-            <div className="flex items-center space-x-1">
-              {navLinks.map((link) => {
-                const Icon = link.icon;
-                const isActive = location.pathname === link.path;
-                
-                return (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    className={`relative group flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 
-                      ${isActive 
-                        ? "text-white bg-blue-600/20" 
-                        : "text-gray-300 hover:text-white hover:bg-blue-600/10"
-                      }`}
+            {navLinks.map(({ path, icon: Icon, label, description }) => {
+              const isActive = location.pathname === path;
+              
+              return (
+                <Link
+                  key={path}
+                  to={path}
+                  className={`relative group flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 
+                    ${isActive 
+                      ? "text-white bg-blue-600/20" 
+                      : "text-gray-300 hover:text-white hover:bg-blue-600/10"
+                    }`}
+                >
+                  <Icon className={`text-xl ${isActive ? "text-blue-400" : "group-hover:text-blue-400"}`} />
+                  <span>{label}</span>
+                  
+                  {/* Tooltip */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    whileHover={{ opacity: 1, y: 0 }}
+                    className="absolute hidden group-hover:block bottom-full left-1/2 transform -translate-x-1/2 px-3 py-1 bg-gray-900 text-white text-xs rounded-md whitespace-nowrap mb-2"
                   >
-                    <Icon className={`text-xl ${isActive ? "text-blue-400" : "group-hover:text-blue-400"}`} />
-                    <span>{link.label}</span>
-                    
-                    {/* Tooltip */}
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      whileHover={{ opacity: 1, y: 0 }}
-                      className="absolute hidden group-hover:block bottom-full left-1/2 transform -translate-x-1/2 px-3 py-1 bg-gray-900 text-white text-xs rounded-md whitespace-nowrap mb-2"
-                    >
-                      {link.description}
-                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 border-4 border-transparent border-t-gray-900"></div>
-                    </motion.div>
+                    {description}
+                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 border-4 border-transparent border-t-gray-900"></div>
+                  </motion.div>
 
-                    {isActive && (
-                      <motion.div
-                        layoutId="navbar-active"
-                        className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-purple-500"
-                        animate
-                      />
-                    )}
-                  </Link>
-                );
-              })}
-            </div>
+                  {isActive && (
+                    <motion.div
+                      layoutId="navbar-active"
+                      className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-purple-500"
+                      animate
+                    />
+                  )}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Mobile Menu Button */}
@@ -205,17 +193,16 @@ const Navbar = () => {
           >
             <div className="bg-gray-900/95 backdrop-blur-lg border-t border-gray-800">
               <div className="px-4 py-4 space-y-2">
-                {navLinks.map((link) => {
-                  const Icon = link.icon;
-                  const isActive = location.pathname === link.path;
+                {navLinks.map(({ path, icon: Icon, label, description }) => {
+                  const isActive = location.pathname === path;
                   
                   return (
                     <motion.div
-                      key={link.path}
+                      key={path}
                       variants={itemVariants}
                     >
                       <Link
-                        to={link.path}
+                        to={path}
                         onClick={() => setIsMenuOpen(false)}
                         className={`flex items-center space-x-3 w-full p-3 rounded-lg transition-all duration-300 
                           ${isActive 
@@ -225,8 +212,8 @@ const Navbar = () => {
                       >
                         <Icon className={`text-xl ${isActive ? "text-blue-400" : ""}`} />
                         <div className="flex flex-col">
-                          <span className="font-medium">{link.label}</span>
-                          <span className="text-xs text-gray-500">{link.description}</span>
+                          <span className="font-medium">{label}</span>
+                          <span className="text-xs text-gray-500">{description}</span>
                         </div>
                       </Link>
                     </motion.div>
